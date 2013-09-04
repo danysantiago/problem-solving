@@ -7,8 +7,6 @@ public class PolynomialShowdown392 {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		
-		
-
 		ArrayList<int[]> cases = new ArrayList<int[]>();
 		
 		try {

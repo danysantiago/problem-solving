@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
-
+//Problem link: http://uva.onlinejudge.org/external/104/10420.html
 public class ListOfConquest10420 {
 
 	public static void main(String[] args) {
@@ -12,6 +12,8 @@ public class ListOfConquest10420 {
 		
 		int numOfLines = Integer.parseInt(in.nextLine());
 		
+		//The key to this problem is the data structure used, a HashMap of the countries with a
+		//HashSet with the names of the girls.
 		HashMap<String, HashSet<String>> superMap = new HashMap<String, HashSet<String>>();
 		
 		for(int i = 0; i < numOfLines; i++) {
@@ -28,6 +30,7 @@ public class ListOfConquest10420 {
 			}
 		}
 		
+		//Sorting can be easily done with Java, performance is good enough here.
 		ArrayList<String> countries = new ArrayList<String>(superMap.keySet());
 		Collections.sort(countries);
 		

@@ -57,7 +57,7 @@ public class OpenSource11239 {
 			
 			//Check if project or student, regex matches upper-case numeric and space strings
 			if(line.matches("[A-Z0-9 ]+")) {
-				//String mathces project, save it in map, it now becomes
+				//String matches project, save it in map, it now becomes
 				//current project, following students go here
 				currProject = line;
 				projectMap.put(line, 0);

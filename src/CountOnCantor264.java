@@ -17,8 +17,6 @@ public class CountOnCantor264 {
 		cols.add(1);
 		cols.add(2);
 		
-		
-		
 		try {
 			while(true) {
 				int term = Integer.parseInt(in.nextLine());
@@ -42,16 +40,27 @@ public class CountOnCantor264 {
 					}
 				}
 				
-				int num = (rowIndex) - (term - rows.get(rowIndex-1));
-				int dem;
-				if(term < cols.get(colIndex)) {
-					dem = (colIndex) - (cols.get(colIndex-1) - term);
+				if(term > cols.get(colIndex-1)) {
+					term -= cols.get(colIndex-1);
 				} else {
-					dem = (colIndex) - (term - cols.get(colIndex-1));
+					colIndex--;
+					term -= rows.get(rowIndex-1);
+				}
+				
+				if((colIndex-1) % 2 == 0) {
+					term--;
+					rowIndex = 1;
+					rowIndex += term;
+					colIndex -= term;
+
+				} else {
+					colIndex = 1 ;
+					rowIndex -= term;
+					colIndex += term;
 				}
 				
 				
-				System.out.println("TERM " + term + " IS " + num + "/" + dem);
+				System.out.println("TERM " + term + " IS " + rowIndex + "/" + colIndex);
 			}
 		} catch (Exception e) {}
 

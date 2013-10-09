@@ -1,12 +1,11 @@
 
-public class Test {
+public class EditingABook11212 {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int a = -1 % 3;
-		System.out.println(a);
+		// TODO Auto-generated method stub
 
 	}
 

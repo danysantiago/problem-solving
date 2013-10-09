@@ -3,89 +3,79 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-
 public class StrategicDefenseInitiative497 {
 
-	
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		
+	public static void main(String[] args) throws NumberFormatException,
+			IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				System.in));
+
 		int cases = Integer.parseInt(reader.readLine());
 		reader.readLine();
-		
-		for(; cases > 0; cases--) {
-		
+
+		for (int x = 0; x < cases; x++) {
 			ArrayList<Integer> missles = new ArrayList<Integer>();
-			
-			while(true) {
+
+			while (reader.ready()) {
 				try {
-					if(reader.ready()) {
-						missles.add(Integer.parseInt(reader.readLine()));
-					} else {
-						break;
-					}
+					missles.add(Integer.parseInt(reader.readLine()));
 				} catch (Exception e) {
 					break;
 				}
 			}
+
+			if (missles.size() == 0) {
+				System.out.println("Max hits: " + 0);
+
+				if (x < cases - 1) {
+					System.out.println();
+				}
+
+				continue;
+			}
+
 			
 			int[] counts = new int[missles.size()];
-			boolean[] taken = new boolean[missles.size()];
-			int maxH = 0;
+			int[] prev = new int[missles.size()];
+			int maxLength = 1, bestEnd = 0;
 			
-			for(int i = 0; i < missles.size(); i++) {
-				if(i == 0) {
-					counts[i] = 0;
-				} else {
-					counts[i] = counts[i-1];
-				}
-				
-				if (missles.get(i) <= maxH) {
-					int j = i-1;
-					while(j >= 0) {
-						if(taken[j]) {
-							if(missles.get(j) > missles.get(i)) {
-								taken[j] = false;
-								counts[i]--;
-								j--;
-							} else {
-								break;
-							}
-						} else {
-							j--;
-						}
+			counts[0] = 1;
+			prev[0] = -1;
+
+			for (int i = 1; i < counts.length; i++) {
+				counts[i] = 1;
+				prev[i] = -1;
+
+				for (int j = i - 1; j >= 0; j--) {
+					if (counts[j] + 1 > counts[i] && missles.get(j) < missles.get(i)) {
+						counts[i] = counts[j] + 1;
+						prev[i] = j;
 					}
 				}
-				
-				maxH = missles.get(i);
-				counts[i]++;
-				taken[i] = true;
-			}
-			
-			int maxCount = 0;
-			int maxIndex = 0;
-			for(int i = 0; i < counts.length; i++) {
-				if(counts[i] > maxCount) {
-					maxCount = counts[i];
-					maxIndex = i;
+
+				if (counts[i] > maxLength) {
+					bestEnd = i;
+					maxLength = counts[i];
 				}
 			}
+
+			System.out.println("Max hits: " + maxLength);
 			
-			System.out.println("Max hits: " + maxCount);
-			if(maxCount != 0) {
-				maxH = missles.get(maxIndex);
-				for(int i = 0; i <= maxIndex ; i++) {
-					if(missles.get(i) <= maxH) {
-						System.out.println(missles.get(i));
-					}
-				}
+			String list = "";
+			while(bestEnd != -1) {
+				list = missles.get(bestEnd) + "\n" + list;
+				bestEnd = prev[bestEnd];
 			}
 			
-			if(cases > 1) {
+			System.out.print(list);
+
+
+			if (x < cases - 1) {
 				System.out.println();
 			}
-		
+
 		}
+
 	}
 
 }
